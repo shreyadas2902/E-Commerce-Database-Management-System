@@ -1,8 +1,7 @@
--- ACID-Compliant Order Transactions
-
+--ACID-Compliant Order Transactions
 USE ecommerce;
 
--- Place an order (atomic: insert order + deduct stock)
+--Place an order (atomic: insert order + deduct stock)
 DELIMITER $$
 
 CREATE PROCEDURE place_order(
@@ -24,7 +23,7 @@ BEGIN
 
     START TRANSACTION;
 
-    -- Check stock and price
+    --Check stock and price
     SELECT price, stock INTO v_price, v_stock
     FROM products WHERE product_id = p_product_id FOR UPDATE;
 
@@ -34,17 +33,17 @@ BEGIN
 
     SET v_total = v_price * p_quantity;
 
-    -- Insert order
+    --Insert order
     INSERT INTO orders (customer_id, total, status)
     VALUES (p_customer_id, v_total, 'confirmed');
 
     SET v_order_id = LAST_INSERT_ID();
 
-    -- Insert order item
+    --Insert order item
     INSERT INTO order_items (order_id, product_id, quantity, unit_price)
     VALUES (v_order_id, p_product_id, p_quantity, v_price);
 
-    -- Deduct stock
+    --Deduct stock
     UPDATE products SET stock = stock - p_quantity
     WHERE product_id = p_product_id;
 
@@ -55,7 +54,7 @@ END$$
 
 DELIMITER ;
 
--- Cancel an order and restore stock
+--Cancel an order and restore stock
 DELIMITER $$
 
 CREATE PROCEDURE cancel_order(IN p_order_id INT)
@@ -67,13 +66,13 @@ BEGIN
 
     START TRANSACTION;
 
-    -- Restore stock for each item in the order
+    --Restore stock for each item in the order
     UPDATE products p
     JOIN order_items oi ON p.product_id = oi.product_id
     SET p.stock = p.stock + oi.quantity
     WHERE oi.order_id = p_order_id;
 
-    -- Mark order as cancelled
+    --Mark order as cancelled
     UPDATE orders SET status = 'cancelled' WHERE order_id = p_order_id;
 
     COMMIT;
