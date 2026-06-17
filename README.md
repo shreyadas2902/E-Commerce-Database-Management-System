@@ -11,12 +11,12 @@ A relational database system for managing an e-commerce platform, built with MyS
 ```
 ecommerce-db/
 ├── schema/
-│   └── create_tables.sql      # Full schema with relationships and indexes
+│   └── create_tables.sql      #Full schema with relationships and indexes
 ├── queries/
-│   ├── transactions.sql        # ACID-compliant order transactions
-│   └── analytics.sql           # Business queries (revenue, top sellers, etc.)
+│   ├── transactions.sql        #ACID-compliant order transactions
+│   └── analytics.sql           #Business queries (revenue, top sellers, etc.)
 ├── data/
-│   └── seed_data.sql           # Sample data for testing
+│   └── seed_data.sql           #Sample data for testing
 └── README.md
 ```
 
