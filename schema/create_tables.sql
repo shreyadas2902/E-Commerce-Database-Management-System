@@ -1,9 +1,8 @@
--- E-Commerce Schema
-
+--E-Commerce Schema
 CREATE DATABASE IF NOT EXISTS ecommerce;
 USE ecommerce;
 
--- Sellers
+--Sellers
 CREATE TABLE sellers (
     seller_id   INT PRIMARY KEY AUTO_INCREMENT,
     name        VARCHAR(100) NOT NULL,
@@ -11,7 +10,7 @@ CREATE TABLE sellers (
     created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Customers
+--Customers
 CREATE TABLE customers (
     customer_id INT PRIMARY KEY AUTO_INCREMENT,
     name        VARCHAR(100) NOT NULL,
@@ -19,7 +18,7 @@ CREATE TABLE customers (
     created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Products
+--Products
 CREATE TABLE products (
     product_id  INT PRIMARY KEY AUTO_INCREMENT,
     seller_id   INT NOT NULL,
@@ -31,7 +30,7 @@ CREATE TABLE products (
     FOREIGN KEY (seller_id) REFERENCES sellers(seller_id) ON DELETE CASCADE
 );
 
--- Orders
+--Orders
 CREATE TABLE orders (
     order_id    INT PRIMARY KEY AUTO_INCREMENT,
     customer_id INT NOT NULL,
@@ -41,7 +40,7 @@ CREATE TABLE orders (
     FOREIGN KEY (customer_id) REFERENCES customers(customer_id)
 );
 
--- Order Items
+--Order Items
 CREATE TABLE order_items (
     item_id     INT PRIMARY KEY AUTO_INCREMENT,
     order_id    INT NOT NULL,
@@ -52,7 +51,7 @@ CREATE TABLE order_items (
     FOREIGN KEY (product_id) REFERENCES products(product_id)
 );
 
--- Indexes for fast lookups
+--Indexes for fast lookups
 CREATE INDEX idx_product_seller   ON products(seller_id);
 CREATE INDEX idx_product_category ON products(category);
 CREATE INDEX idx_order_customer   ON orders(customer_id);
