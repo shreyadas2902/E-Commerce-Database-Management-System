@@ -1,5 +1,4 @@
--- Sample Data
-
+--Sample Data
 USE ecommerce;
 
 INSERT INTO sellers (name, email) VALUES
@@ -20,7 +19,7 @@ INSERT INTO products (seller_id, name, category, price, stock) VALUES
     (3, 'Linen Tote Bag',       'Fashion',       19.99, 90),
     (3, 'Canvas Sneakers',      'Fashion',       54.99, 40);
 
--- Place a sample order using the stored procedure
-CALL place_order(1, 1, 2);  -- Alice buys 2 Wireless Headphones
-CALL place_order(2, 3, 1);  -- Bob buys 1 Ceramic Mug Set
-CALL place_order(3, 6, 1);  -- Carol buys 1 Canvas Sneakers
+--Place a sample order using the stored procedure
+CALL place_order(1, 1, 2);  --Alice buys 2 Wireless Headphones
+CALL place_order(2, 3, 1);  --Bob buys 1 Ceramic Mug Set
+CALL place_order(3, 6, 1);  --Carol buys 1 Canvas Sneakers
