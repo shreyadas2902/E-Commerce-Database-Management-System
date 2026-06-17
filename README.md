@@ -2,7 +2,7 @@
 
 A relational database system for managing an e-commerce platform, built with MySQL, covering schema design, ACID-compliant transactions, and optimized queries.
                                              
-                                              **This project was done as a part of my course curriculum.**
+    **This project was done as a part of my course curriculum.**
 
 **Dataset:** Kaggle  
 **Tools:** MySQL
