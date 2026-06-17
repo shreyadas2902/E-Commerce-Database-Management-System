@@ -1,8 +1,7 @@
--- Analytics Queries
-
+--Analytics Queries
 USE ecommerce;
 
--- Top 10 products by revenue
+--Top 10 products by revenue
 SELECT
     p.name                          AS product,
     s.name                          AS seller,
@@ -17,7 +16,7 @@ GROUP BY p.product_id, s.seller_id
 ORDER BY revenue DESC
 LIMIT 10;
 
--- Revenue per seller
+--Revenue per seller
 SELECT
     s.name                          AS seller,
     COUNT(DISTINCT o.order_id)      AS total_orders,
@@ -30,7 +29,7 @@ WHERE o.status != 'cancelled'
 GROUP BY s.seller_id
 ORDER BY total_revenue DESC;
 
--- Low stock alert (products with fewer than 10 units)
+--Low stock alert (products with fewer than 10 units)
 SELECT
     p.product_id,
     p.name      AS product,
@@ -41,7 +40,7 @@ JOIN sellers s ON p.seller_id = s.seller_id
 WHERE p.stock < 10
 ORDER BY p.stock ASC;
 
--- Monthly order volume
+--Monthly order volume
 SELECT
     DATE_FORMAT(created_at, '%Y-%m') AS month,
     COUNT(*)                          AS orders,
